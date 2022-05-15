@@ -50,3 +50,14 @@ php artisan migrate
 csrfトークンが入ってないとフォーム送信が弾かれるので、
 formを作成する時は必須。
 ※formにこれがないと419で弾かれる。
+
+
+5. auth
+```
+composer require laravel/ui
+php artisan ui vue --auth
+// vuejs とかのインストール
+npm install
+// vuejs とかのコンパイル
+npm run dev
+```

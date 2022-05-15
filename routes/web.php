@@ -26,3 +26,6 @@ use App\Http\Controllers\SandBoxController;
  
 Route::get('/sandbox', [SandBoxController::class, 'index']);
 Route::post('/sandbox', [SandBoxController::class, 'store']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
