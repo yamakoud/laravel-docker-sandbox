@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  app:
+    # command: php artisan serve --port=8080
+    build:
+      context: "."
+      dockerfile: "./Dockerfile"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      # DBのルートパスワードは、dbのコンテナ以外には見せたくないため、空文字列で上書きする
+      - DB_ROOT_PASSWORD=
+    ports:
+      - 8080:80
+    volumes:
+      - ./laravel:/usr/src/sample-livewire
+      - composer:/usr/src/sample-livewire/vendor
+      - laravel_cache:/usr/src/sample-livewire/bootstrap/cache
+      - laravel_storage:/usr/src/sample-livewire/storage
+  db:
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    image: mariadb:10.4.11
+    environment:
+      - TZ=Asia/Tokyo
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  composer:
+  db:
+  laravel_cache:
+  laravel_storage:
+  node_modules:
+

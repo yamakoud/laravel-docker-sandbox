@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  db:
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    image: mariadb:10.4.11
+    environment:
+      - TZ=Asia/Tokyo
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=pass
+      #)- MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  composer:
+  db:
+  laravel_cache:
+  laravel_storage:
+  node_modules:
+
