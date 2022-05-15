@@ -22,3 +22,6 @@ Route::get('/', function () {
 });
 
 // Route::get('/sandbox', );
+use App\Http\Controllers\SandBoxController;
+ 
+Route::get('/sandbox', [SandBoxController::class, 'index']);
