@@ -14,7 +14,9 @@ class SandBoxController extends Controller
     public function index()
     {
         // return view('hello.world');
-        return 'SandBoxController::index()';
+        $message = 'From index()';
+        // return 'SandBoxController::index()';
+        return view('sandbox.index', ['message' => $message]);
     }
 
     /**
