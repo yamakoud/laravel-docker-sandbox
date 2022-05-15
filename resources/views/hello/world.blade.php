@@ -27,3 +27,26 @@ execute migration.
 ```
 php artisan migrate
 ```
+
+3. mass assignable の設定
+```
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['message'];
+```
+モデルの作成時に、fillableを設定する。
+これが無いと値のセットができなくなったりする。
+※DBにあるカラムと同じように設定する。
+
+4. form のcsrf
+```
+<form>
+    {{ csrf_field() }}
+</form>
+```
+csrfトークンが入ってないとフォーム送信が弾かれるので、
+formを作成する時は必須。
+※formにこれがないと419で弾かれる。
