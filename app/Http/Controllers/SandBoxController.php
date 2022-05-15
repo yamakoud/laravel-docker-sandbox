@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SandBox;
 use Illuminate\Http\Request;
 
 class SandBoxController extends Controller
@@ -14,7 +15,7 @@ class SandBoxController extends Controller
     public function index()
     {
         // return view('hello.world');
-        $message = 'From index()';
+        $message = SandBox::first()->message;
         // return 'SandBoxController::index()';
         return view('sandbox.index', ['message' => $message]);
     }
@@ -37,7 +38,12 @@ class SandBoxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sandbox = Sandbox::first();
+        $sandbox->message = $request->message;
+        $sandbox->update();
+        return redirect('/sandbox');
+        // $sandbox = SandBox::create(['message' => $request->message]);
+        // return 'success!';
     }
 
     /**
